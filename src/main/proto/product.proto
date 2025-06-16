@@ -1,0 +1,68 @@
+syntax = "proto3";
+package org.github.naveenerroju.products_service;
+
+option java_package = "org.github.naveenerroju.products_service.proto";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+
+service ProductService {
+  rpc CreateProduct(Product) returns (Product);
+  rpc GetProduct(ProductRequest) returns (Product);
+  rpc UpdateProduct(Product) returns (Product);
+  rpc SearchProducts(SearchProductsRequest) returns (SearchProductsResponse);
+}
+
+message Product {
+  string id = 1;
+  string name = 2;
+  string slug = 3;
+  string description = 4;
+  string brand = 5;
+  string category_id = 6;
+  string seller_id = 7;
+  repeated string images = 8;
+  repeated string tags = 9;
+  double base_price = 10;
+  int32 stock = 11;
+  FlashSale flash_sale = 12;
+  Ratings ratings = 13;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+  bool is_active = 16;
+
+  message Ratings {
+    double average = 1;
+    int32 count = 2;
+  }
+
+  message FlashSale {
+    bool is_active = 1;
+    double flash_price = 2;
+    google.protobuf.Timestamp start_time = 3;
+    google.protobuf.Timestamp end_time = 4;
+    int32 max_qty_per_user = 5;
+    int32 total_flash_stock = 6;
+    int32 sold_flash_qty = 7;
+  }
+}
+
+message ProductRequest {
+  string product_id = 1;
+}
+
+// Search request with filters
+message SearchProductsRequest {
+  string category_id = 1;
+  double min_price = 2;
+  double max_price = 3;
+  bool flash_sale_active = 4;
+  string seller_id = 5;
+  repeated string tags = 6;
+  string brand = 7;
+}
+
+// Response with list of products
+message SearchProductsResponse {
+  repeated Product products = 1;
+}
