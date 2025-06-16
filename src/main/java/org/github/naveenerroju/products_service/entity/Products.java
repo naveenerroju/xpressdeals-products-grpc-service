@@ -105,7 +105,15 @@ public class Products {
         this.updatedAt=Date.from(Instant.now());
     }
 
-    //Getters and Setters
+    //Getters and Setters, So mapper can use this
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -193,6 +201,30 @@ public class Products {
 
     public void setFlashSale(FlashSales flashSale) {
         this.flashSale = flashSale;
+    }
+
+    public Ratings getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Ratings ratings) {
+        this.ratings = ratings;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public Boolean getActive() {

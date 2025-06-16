@@ -1,7 +1,8 @@
 syntax = "proto3";
 package org.github.naveenerroju.products_service;
 
-option java_package = "org.github.naveenerroju.products_service.proto";
+option java_package = "org.github.naveenerroju.products_service";
+option java_outer_classname = "ProfileServiceProto";
 option java_multiple_files = true;
 
 import "google/protobuf/timestamp.proto";
@@ -10,7 +11,7 @@ service ProductService {
   rpc CreateProduct(Product) returns (Product);
   rpc GetProduct(ProductRequest) returns (Product);
   rpc UpdateProduct(Product) returns (Product);
-  rpc SearchProducts(SearchProductsRequest) returns (SearchProductsResponse);
+  rpc SearchProducts(SearchProductsRequest) returns (stream Product);
 }
 
 message Product {
@@ -60,9 +61,4 @@ message SearchProductsRequest {
   string seller_id = 5;
   repeated string tags = 6;
   string brand = 7;
-}
-
-// Response with list of products
-message SearchProductsResponse {
-  repeated Product products = 1;
 }
